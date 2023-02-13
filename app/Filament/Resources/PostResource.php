@@ -37,6 +37,8 @@ use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
+    protected static ?string $recordTitleAttribute = 'title';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 

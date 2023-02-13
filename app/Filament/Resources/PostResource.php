@@ -25,8 +25,10 @@ use Filament\Forms\Components\BelongsToSelect;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Filament\Resources\PostResource\RelationManagers;
+use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Tables\Columns\ToggleColumn;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
@@ -42,7 +44,8 @@ class PostResource extends Resource
             ->schema([
                 Card::make()->schema([
                     BelongsToSelect::make('category_id')
-                        ->relationship('category', 'name'),
+                        ->relationship('category', 'name')
+                        ->searchable(),
                     TextInput::make('title')->reactive()
                         ->afterStateUpdated(function (Closure $set, $state) {
                             $set('slug', Str::slug($state));
@@ -62,7 +65,7 @@ class PostResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('title')->limit(50)->sortable(),
                 TextColumn::make('slug')->limit(50),
-                BooleanColumn::make('is_published')
+                ToggleColumn::make('is_published')
                 // SpatieMediaLibraryImageColumn::make('thumbnail')->collection('posts')
             ])
             ->filters([
@@ -79,7 +82,7 @@ class PostResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            TagsRelationManager::class
         ];
     }
 

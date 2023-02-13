@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\TagResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\TagResource\RelationManagers;
+use App\Filament\Resources\TagResource\RelationManagers\PostsRelationManager;
 
 class TagResource extends Resource
 {
@@ -60,7 +61,7 @@ class TagResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostsRelationManager::class
         ];
     }
 

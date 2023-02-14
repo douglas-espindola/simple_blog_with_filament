@@ -32,7 +32,8 @@ use App\Filament\Resources\PostResource\RelationManagers;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\PostResource\RelationManagers\TagsRelationManager;
-
+use App\Filament\Resources\PostResource\Widgets\StatsOverview;
+use Illuminate\Support\Arr;
 
 class PostResource extends Resource
 {
@@ -92,6 +93,13 @@ class PostResource extends Resource
     {
         return [
             TagsRelationManager::class
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            StatsOverview::class,
         ];
     }
 
